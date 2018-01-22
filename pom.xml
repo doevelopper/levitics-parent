@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.github.levitics</groupId>
+		<artifactId>base-pom</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>base-pom</relativePath>
+	</parent>
+
+	<groupId>io.github.levitics</groupId>
+	<artifactId>levitics.arkhe.parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>LEVITICS Engineering Technologies Parent POM</name>
+	<description>LEVITICS parent POM with most oftenly used pre-configured features.</description>
+	<url>http://levitics.github.io/</url>
+	<inceptionYear>2017</inceptionYear>
+	<organization>
+		<name>levitics.github.io</name>
+		<url>http://levitics.github.io/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>ahl</id>
+			<name>Adrian L. H</name>
+			<email>ahl@${corporate.short.url}</email>
+			<organization>ASF</organization>
+			<roles>
+				<role>PMC Chair</role>
+				<role>Architect</role>
+				<role>Committer</role>
+			</roles>
+			<timezone>Europe/Paris</timezone>
+		</developer>
+		<developer>
+			<id>esalt</id>
+			<name>Evelyn Salt</name>
+			<roles>
+				<role>Emeritus</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>hhart</id>
+			<name>Harry Hart</name>
+			<roles>
+				<role>Emeritus</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>pcoulson</id>
+			<name>Phil Coulson</name>
+			<roles>
+				<role>Emeritus</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>lonewolf</id>
+			<name>Lone Wolf</name>
+			<email>lonewolf@${corporate.short.url}</email>
+			<roles>
+				<role>PMC Member</role>
+			</roles>
+			<timezone>Europe/Berlin</timezone>
+		</developer>
+	</developers>
+	<mailingLists>
+		<mailingList>
+			<name>levitics dev</name>
+			<archive>https://groups.google.com/forum/#!forum/levitics-dev</archive>
+			<subscribe>https://groups.google.com/forum/#!forum/levitics-dev/join</subscribe>
+			<unsubscribe>https://groups.google.com/forum/#!forum/levitics-dev/join</unsubscribe>
+			<post>levitics-dev@googlegroups.com</post>
+		</mailingList>
+		<mailingList>
+			<name>levitics user</name>
+			<archive>https://groups.google.com/forum/#!forum/levitics-user</archive>
+			<subscribe>https://groups.google.com/forum/#!forum/levitics-user/join</subscribe>
+			<unsubscribe>https://groups.google.com/forum/#!forum/levitics-user/join</unsubscribe>
+			<post>levitics-user@googlegroups.com</post>
+		</mailingList>
+		<mailingList>
+			<name>levitics commits List</name>
+			<archive>https://groups.google.com/forum/#!forum/levitics-commits</archive>
+			<subscribe>https://groups.google.com/forum/#!forum/levitics-commits/join</subscribe>
+			<unsubscribe>https://groups.google.com/forum/#!forum/levitics-commits/join</unsubscribe>
+			<post>levitics-commits@googlegroups.com</post>
+		</mailingList>
+		<mailingList>
+			<name>levitics Issues List</name>
+			<subscribe>issues-subscribe@maven.apache.org</subscribe>
+			<unsubscribe>issues-unsubscribe@maven.apache.org</unsubscribe>
+			<archive>https://mail-archives.apache.org/mod_mbox/maven-issues/</archive>
+			<otherArchives>
+				<otherArchive>http://levitics-issues.markmail.org/</otherArchive>
+			</otherArchives>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<url>https://github.com/doevelopper/levitics-parent</url>
+		<connection>scm:git:ssh://github.com/doevelopper/levitics-parent.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/doevelopper/levitics-parent.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issue Management</system>
+		<url>https://github.com/doevelopper/levitics-parent/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://www.travis-ci.org/doevelopper/levitics-parent</url>
+	</ciManagement>
+
+	<distributionManagement>
+		<site>
+			<id>gh-pages</id>
+			<name>Mybatis GitHub Pages</name>
+			<url>github:ssh://github.com/doevelopper/levitics-parent/</url>
+		</site>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<clirr.comparisonVersion>28</clirr.comparisonVersion>
+		<gcu.product>${project.name}</gcu.product>
+
+		<checkstyle.plugin>2.17</checkstyle.plugin>
+		<javadoc.version>3.0.0</javadoc.version>
+		<surefire.version>2.20.1</surefire.version>
+		<spotbugs.onlyAnalyze />
+
+		<osgi.symbolicName>${project.groupId}.${project.artifactId}</osgi.symbolicName>
+		<osgi.export>${project.groupId}.*;version=${project.version};-noimport:=true</osgi.export>
+		<osgi.import>*</osgi.import>
+		<osgi.dynamicImport />
+		<osgi.private />
+
+		<!-- Animal Sniffer Signature -->
+		<signature.group>org.codehaus.mojo.signature</signature.group>
+		<signature.version>1.1</signature.version>
+	</properties>
+
+	<modules>
+		<module>base-pom</module>
+		<!--module>build-tools-pom</module>
+		<module>profiles-pom</module>
+		<module>build-tools-pom</module>
+		<module>cmake-pom</module>
+		<module>closed-source-pom</module>
+		<module>private-pom</module>
+		<module>product-pom</module>
+		<module>public-pom</module>
+		<module>central-pom</module-->
+	</modules>
+</project>

@@ -1,0 +1,42 @@
+language: java
+os: linux
+dist: trusty
+sudo: required
+compiler: gcc
+sudo: false
+
+jdk:
+  - oraclejdk8
+  - openjdk8
+
+cache:
+    directories:
+        - $HOME/.m2
+
+branches:
+    except:
+        - gh-page
+
+script:
+    - set -e
+    - mvn clean install --errors --batch-mode
+    - mvn clean
+env:
+  global:
+    - MAVEN_OPTS="-Xmx256m"
+    - JAVA_OPTS="-Xmx256m"
+    - secure: "OV6SbBk1BTOo2YAQ+9tGQgUJlSAjF0DnVE9iURUB4QngJY/BR+uyrVKzwNvP\nF+UyGCfRyrElJsQOBpG3xkSSqAl51Is5KP/nZ9LBR3X35JnT/U3T6ShfhqyE\nVsVcykozOljUOysaVfQ13y5wc0dUS9HtDBjuy/ROf7Pd0YqINPs="
+    - secure: "Vv+stvXgFu+INGiHEayOeOOxDsrolrE0ioRhyihGJpdnQdd7kn/3Btw2uDaR\n//IEcDsC2OrXPx8MHlxbqCkTVQINkX4q2esFDLiIdDeVSC8XefWzDVx7aZKs\npQqPZMvUg0a6yWJjRe8nzbCMqxGRGHPZfBc77/IQvXnQkTt0Mrs="
+  matrix:
+    # Latest Boost, gcc 7.2, C++14 mode
+    - DOCKER_IMAGE=lballabio/quantlib-devenv:artful
+		CACHEDCC="ccache gcc" CACHEDCXX="ccache g++"
+		CXXFLAGS="-O2 -Wall -Wno-unknown-pragmas -Wno-deprecated-declarations -Werror -std=c++14"
+
+notifications:
+  email:
+    recipients:
+      - happyman@hotmail.fr
+      - rolland.doe@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always

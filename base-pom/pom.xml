@@ -1,0 +1,451 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.levitics</groupId>
+	<artifactId>base-pom</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>${corporate.name} Base POM</name>
+	<description>Base POM for ${corporate.name} projects</description>
+	<url>http://www.levitics.com/</url>
+
+	<licenses>
+		<license>
+			<name>Atlassian 3.0 End User License Agreement</name>
+			<url>http://www.atlassian.com/end-user-agreement/</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>THE APACHE SOFTWARE LICENSE, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+			<url>${licenses-header-path}/licenses/GPL-3.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE Version 3</name>
+			<url>${licenses-header-path}/licenses/LGPL-3.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+		<license>
+			<name>WTFPL - Do What The Fuck You Want To Public License</name>
+			<url>http://www.wtfpl.net/</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>levitics.github.io</name>
+		<url>http://levitics.github.io/</url>
+	</organization>
+
+	<scm>
+		<connection>${github.scm.con}</connection>
+		<developerConnection>${github.dev.con}</developerConnection>
+		<url>${github.scm.url}</url>
+		<tag>${scm.tag}</tag>
+	</scm>
+
+	<issueManagement>
+		<system>${issue.system}</system>
+		<url>${issue.url}/${issue.key}</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>${ci.system}</system>
+		<url>${ci.url}/${ci.key}</url>
+		<notifiers>
+			<notifier>
+				<configuration>
+					<address>${ci.contact-admin}</address>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>${distribution.releaseRepositoryId}</id>
+			<url>${distribution.releaseRepositoryUrl}</url>
+			<name>${distribution.releaseRepositoryName}</name>
+			<uniqueVersion>false</uniqueVersion>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>interval:120</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>interval:120</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+		<snapshotRepository>
+			<id>${distribution.snapshotRepositoryId}</id>
+			<url>${distribution.snapshotRepositoryUrl}</url>
+			<name>${distribution.snapshotRepositoryName}</name>
+			<uniqueVersion>false</uniqueVersion>
+			<releases>
+				<enabled>falses</enabled>
+				<updatePolicy>interval:10</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>interval:10</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</snapshotRepository>
+		<site>
+			<id>${site.deploy.id}</id>
+			<name>Deployment through GitHub's site deployment plugin</name>
+			<url>${site.deploy.url}</url>
+		</site>
+		<downloadUrl>${project.url}/downloads/current/${project.artifactId}-${project.version}</downloadUrl>
+		<relocation>
+			<groupId>reloc-gid</groupId>
+			<artifactId>reloc-aid</artifactId>
+			<version>reloc-version</version>
+			<message>project-reloc-msg</message>
+		</relocation>
+	</distributionManagement>
+
+	<properties>
+		<global.encoding>UTF-8</global.encoding>
+		<project.build.sourceEncoding>${global.encoding}</project.build.sourceEncoding>
+		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
+		<project.reporting.outputEncoding>${global.encoding}</project.reporting.outputEncoding>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.testTarget>1.6</maven.compiler.testTarget>
+		<maven.compiler.testSource>1.6</maven.compiler.testSource>
+		<license.skip>true</license.skip>
+		<skipTests/>
+		<skipIiTests/>
+		<hostname/>
+		<computer/>
+		<nproc/>
+		<arch>${os.arch}</arch>
+		<os>${os.name}</os>
+		<sys.os.arch>${os.arch}</sys.os.arch>
+		<sys.os.name>${os.name}</sys.os.name>
+		<sys.os.version>${os.version}</sys.os.version>
+		<sys.user.name>${user.name}</sys.user.name>
+		<sys.java.vendor>${java.vendor}</sys.java.vendor>
+		<sys.java.version>${java.version}</sys.java.version>
+		<sys.user.timezone>${user.timezone}</sys.user.timezone>
+		<aol>${os.name}-${os.arch}</aol>
+		<build.platform>${os.name}-${os.arch}-${sun.arch.data.model}</build.platform>
+		<!-- Used to install 3rd-party runtimes for testing -->
+		<skipRequirements>${skipTests}</skipRequirements>
+		<skipPrivateRequirements>true</skipPrivateRequirements>
+		<skipSigning>true</skipSigning>
+		<!--
+        ISO 8601, see http://en.wikipedia.org/wiki/ISO_8601. This
+        property is defined in order to give us an ability to use ${maven.build.timestamp}
+        later in the file
+        -->
+		<maven.build.timestamp.format>yyyy-MM-dd hh:mm:ss.SSSZ</maven.build.timestamp.format>
+		<currentYear>2017</currentYear> <!-- manual setting -->
+		<maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
+		<currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
+
+		<github.scm.host>github.com</github.scm.host>
+		<github.scm.con>scm:git:https://${github.scm.host}/${git.corporate.name}/${project.artifactId}</github.scm.con>
+		<github.scm.dev.con>scm:git:git@${github.scm.host}:${git.corporate.name}/${project.artifactId}</github.scm.dev.con>
+		<github.scm.url>https://${github.scm.host}/${git.corporate.name}/${project.artifactId}</github.scm.url>
+
+		<bitbucket.scm.host>bitbucket.org</bitbucket.scm.host>
+		<bitbucket.scm.con>scm:git:ssh://git@${bitbucket.scm.host}/${git.corporate.name}/${project.artifactId}.git</bitbucket.scm.con>
+		<bitbucket.scm.dev.con>scm:git:ssh://git@${bitbucket.scm.host}/${git.corporate.name}/${project.artifactId}.git</bitbucket.scm.dev.con>
+		<bitbucket.scm.url>https://${bitbucket.scm.host}/${git.corporate.name}/${project.artifactId}</bitbucket.scm.url>
+
+		<scm.tag>HEAD</scm.tag>
+		<software.version>LEV IT TECHNOLOGIES CO.,LTD</software.version>
+		<tools.path/>
+
+		<issue.key>LOPOM</issue.key> <!-- LEVITICS-ORGANIZATION-POM -->
+		<issue.system>JIRA</issue.system>
+		<issue.url>http://defects.management.${git.corporate.name}/browse</issue.url>
+
+		<ci.key>levitics-parent</ci.key>
+		<ci.system>Travis CI</ci.system>
+		<ci.url>https://staging-bamboo.internal.${corporate}/browse</ci.url>
+		<ci.contact-admin>${project.developers[0].email}</ci.contact-admin>
+
+		<projectReleaseKey>8E5GYEGGh68Fo3DJ0UXy7i7Y4Rw2VB8U</projectReleaseKey> <!-- http://randomkeygen.com/ CodeIgniter Encryption Keys-->
+
+
+		<organization.name>LEVITICS Labs</organization.name>
+		<corporate>levitics</corporate>
+		<corporate.short.url>levitics.com</corporate.short.url>
+		<organization.url>http://${corporate.short.url}</organization.url>
+		<git.corporate.name>doevelopper</git.corporate.name>
+		<corporate.name>LEVITICS Arkhe</corporate.name>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<wagon-ssh.version>3.0.0</wagon-ssh.version>
+		<kotlin.version>1.2.10</kotlin.version>
+		<buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+		<github.site-maven-plugin.version>0.9</github.site-maven-plugin.version>
+		<enforceExcludePattern>BUILD_ALIAS|jbossTychoPluginsVersion|jbosstoolsRelengPublishVersion|parsedVersion.qualifier|parsedVersion.osgiVersion|TARGET_PLATFORM_VERSION|TARGET_PLATFORM_VERSION_MIN|TARGET_PLATFORM_VERSION_MAXIMUM|TARGET_PLATFORM_VERSION_MAX|JBTCENTRALTARGET_VERSION|TARGET_PLATFORM_CENTRAL_MAX|tpc.version|central.tpc.version|discovery.tpc.version|p2StatsUrl|angularjs.repo.url|targetplatform.url|jbosstools-target-site</enforceExcludePattern>
+		<!-- more excludes; this lets individual projects add their own exclusions. Note, if using this, must start with a pipe (|) so these are appended as OR matches -->
+		<enforceExcludePatternExtras></enforceExcludePatternExtras>
+	</properties>
+	<build>
+		<extensions>
+			<extension>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>1.4.0.Final</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>${wagon-ssh.version}</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>3.0.0</version>
+			</extension>
+
+		</extensions>
+		<directory>${project.basedir}/${os.detected.classifier}</directory>
+		<plugins>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m5.1</version>
+				<configuration>
+					<flowInitContext>
+						<masterBranchName>master</masterBranchName>
+						<developBranchName>development</developBranchName>
+						<featureBranchPrefix>feature-</featureBranchPrefix>
+						<releaseBranchPrefix>release-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+						<versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+					</flowInitContext>
+					<pushFeatures>true</pushFeatures>
+					<pushHotfixes>true</pushHotfixes>
+					<pushReleases>true</pushReleases>
+					<username>MY_USER</username>
+					<password>MY_PW</password>
+					<enableSshAgent>true</enableSshAgent>
+					<noDeploy>true</noDeploy>
+					<useReleaseProfile>false</useReleaseProfile>
+					<noReleaseBuild>false</noReleaseBuild>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<scmCommentPrefix>[jgitflow-${project.artifactId}]</scmCommentPrefix>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>${buildnumber-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>generate-project-build-number</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>create</goal>
+							<goal>create-timestamp</goal>
+						</goals>
+						<configuration>
+							<buildNumberPropertyName>revision</buildNumberPropertyName>
+							<timestampPropertyName>timestamp</timestampPropertyName>
+							<timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ss.SSS}</timestampFormat>
+							<doCheck>false</doCheck>
+							<doUpdate>false</doUpdate>
+							<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+							<shortRevisionLength>10</shortRevisionLength>
+							<revisionOnScmFailure>TartempionRelease</revisionOnScmFailure> 
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- to disable all enforcer checks, build with -Denforcer.skip=true -->
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<encoding>${global.encoding}</encoding>
+					<header>${project.basedir}/license.txt</header>
+					<strictCheck>true</strictCheck>
+					<aggregate>true</aggregate>
+					<properties>
+						<owner>${project.organization.name}</owner>
+						<email>${project.organization.url}</email>
+						<java>SLASHSTAR_STYLE</java>
+						<failOnMissingHeader>true</failOnMissingHeader>
+						<h_inceptionYear>${project.inceptionYear}</h_inceptionYear>
+						<h_currentYear>${currentYear}</h_currentYear>
+						<h_copyrightOwner>${project.organization.name}</h_copyrightOwner>
+						<h_license_years>${license_years}</h_license_years>
+					</properties>
+					<excludes>
+						<exclude>**/*.ctrl</exclude>
+						<exclude>**/*.dat</exclude>
+						<exclude>**/*.lck</exclude>
+						<exclude>**/*.log</exclude>
+						<exclude>**/.*/**</exclude>
+						<exclude>**/*.rst</exclude>
+						<exclude>**/*maven-wrapper.properties</exclude>
+						<exclude>**/README*</exclude>
+						<exclude>**/*.feature</exclude>
+						<exclude>.factorypath</exclude>
+						<exclude>.gitattributes</exclude>
+						<exclude>mvnw</exclude>
+						<exclude>mvnw.cmd</exclude>
+						<exclude>ICLA</exclude>
+						<exclude>LICENSE</exclude>
+						<exclude>KEYS</exclude>
+						<exclude>NOTICE</exclude>
+						<exclude>images/**</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>LICENSE_HEADER</exclude>
+						<exclude>license.txt</exclude>
+					</excludes>
+					<includes>
+						<include>**/src/**</include>
+					</includes>
+					<mapping>
+						<xml.vm>XML_STYLE</xml.vm>
+						<cmake>SCRIPT_STYLE</cmake>
+						<txt>SCRIPT_STYLE</txt>
+						<properties>SCRIPT_STYLE</properties>
+						<in>SCRIPT_STYLE</in>
+						<mk>SCRIPT_STYLE</mk>
+						<application>XML_STYLE</application>
+						<apt.vm>DOUBLETILDE_STYLE</apt.vm>
+						<vm>SHARPSTAR_STYLE</vm>
+					</mapping>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.mycila</groupId>
+						<artifactId>license-maven-plugin-git</artifactId>
+						<version>3.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>license-maven-plugin</artifactId>
+						<version>1.14</version>
+					</dependency>
+					<!--dependency>
+						<groupId>com.codenvy.resources</groupId>
+						<artifactId>codenvy-eclipse-license-resource-bundle</artifactId>
+						<version>13</version>
+					</dependency-->
+				</dependencies>
+				<executions>
+					<execution>
+						<id>check-headers</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.github.github</groupId>
+					<artifactId>site-maven-plugin</artifactId>
+					<version>${github.site-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>${license-maven-plugin.version}</version>
+					<configuration>
+						<inceptionYear>2014</inceptionYear>
+						<organizationName>KIXEYE, Inc</organizationName>
+						<projectName>Scout</projectName>
+						<licenseName>apache_v2</licenseName>
+						<clearAfterOperation>true</clearAfterOperation>
+					</configuration>
+					<executions>
+						<execution>
+							<id>checking-license-header</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>check-file-header</goal>
+								<goal>add-third-party</goal>
+								<goal>update-file-header</goal>
+								<goal>update-project-license</goal>
+							</goals>
+							<configuration>
+								<!-- Fail the build if a detected license is not in the white list. -->
+								<failIfWarning>true</failIfWarning>
+								<includeTransitiveDependencies>false</includeTransitiveDependencies>
+								<includedLicenses>Apache 2|CDDL|Eclipse|ISC|MIT</includedLicenses>
+								<licenseName>apache_v2</licenseName>
+								<failOnMissingHeader>true</failOnMissingHeader>
+								<roots>
+									<root>src/main/cpp</root>
+									<root>src/test/cpp</root>
+								</roots>
+							</configuration>
+							<!-- Consolidate license names. -->
+							<!--licenseMerges>
+								<licenseMerge>Apache 2|ASF 2.0|Apache License 2.0|Apache Software License - Version 2.0|Apache License, Version 2.0|The Apache Software License, Version 2.0</licenseMerge>
+								<licenseMerge>CDDL|CDDL 1.1|CDDL + GPLv2 with classpath exception</licenseMerge>
+								<licenseMerge>Eclipse|Eclipse Public License 1.0|Eclipse Public License - Version 1.0</licenseMerge>
+								<licenseMerge>MIT|The MIT License</licenseMerge>
+							</licenseMerges-->
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<!-- Plugin for creating Javadocs; goal for preparing docs for upload to github: javadoc:aggregate -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.9.1</version>
+					<configuration>
+						<bottom><![CDATA[Copyright &#169; {inceptionYear}&#x2013;{currentYear} {organizationName}. Generated from source code published under the Apache License 2.0. For more information, see the <a href="https://www.mediawiki.org/wiki/Wikidata_Toolkit">Wikidata Toolkit homepage</a>]]></bottom>
+					</configuration>
+				</plugin>
+				<plugin>
+					<!-- Plugin for uploading Javadocs to github; goal: scm-publish:publish-scm -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-publish-plugin</artifactId>
+					<version>1.1</version>
+					<configuration>
+						<checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+						<checkinComment>Publishing javadoc for ${project.artifactId}:${project.version}</checkinComment>
+						<content>${project.reporting.outputDirectory}/apidocs</content>
+						<pubScmUrl>scm:git:https://github.com/Wikidata/Wikidata-Toolkit.git</pubScmUrl>
+						<scmBranch>gh-pages</scmBranch>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.14</version>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
